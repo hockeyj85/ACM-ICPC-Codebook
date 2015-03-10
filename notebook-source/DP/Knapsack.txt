@@ -1,0 +1,12 @@
+Unbounded Knapsack
+
+Returns max value that you can fit inside of a given space.
+
+Assume not tested, from old codebook.
+
+Variables
+int N: Number of items
+int W: Max weight
+int[] v: Item values
+int[] w: Item weights
+

@@ -1,0 +1,119 @@
+
+<!doctype html>
+<html>
+<head>
+	<title>Notebook</title>
+	<style>
+
+	html { font-family: arial, sans-serif; }
+	h3 { margin-bottom: 0; }
+	.complexity { float: right; font-weight: normal; font-style: italic; }
+	.description { margin-left: 1em; font-style: italic; font-family: monospace; white-space: pre }
+
+		 .hll { background-color: #ffffcc }
+		  { background: #f8f8f8; }
+		 .c { color: #408080; font-style: italic } /* Comment */
+		 .err { border: 1px solid #FF0000 } /* Error */
+		 .k { color: #008000; font-weight: bold } /* Keyword */
+		 .o { color: #666666 } /* Operator */
+		 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+		 .cp { color: #BC7A00 } /* Comment.Preproc */
+		 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+		 .cs { color: #408080; font-style: italic } /* Comment.Special */
+		 .gd { color: #A00000 } /* Generic.Deleted */
+		 .ge { font-style: italic } /* Generic.Emph */
+		 .gr { color: #FF0000 } /* Generic.Error */
+		 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+		 .gi { color: #00A000 } /* Generic.Inserted */
+		 .go { color: #888888 } /* Generic.Output */
+		 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+		 .gs { font-weight: bold } /* Generic.Strong */
+		 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+		 .gt { color: #0044DD } /* Generic.Traceback */
+		 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+		 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+		 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+		 .kp { color: #008000 } /* Keyword.Pseudo */
+		 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+		 .kt { color: #B00040 } /* Keyword.Type */
+		 .m { color: #666666 } /* Literal.Number */
+		 .s { color: #BA2121 } /* Literal.String */
+		 .na { color: #7D9029 } /* Name.Attribute */
+		 .nb { color: #008000 } /* Name.Builtin */
+		 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+		 .no { color: #880000 } /* Name.Constant */
+		 .nd { color: #AA22FF } /* Name.Decorator */
+		 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+		 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+		 .nf { color: #0000FF } /* Name.Function */
+		 .nl { color: #A0A000 } /* Name.Label */
+		 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+		 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+		 .nv { color: #19177C } /* Name.Variable */
+		 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+		 .w { color: #bbbbbb } /* Text.Whitespace */
+		 .mf { color: #666666 } /* Literal.Number.Float */
+		 .mh { color: #666666 } /* Literal.Number.Hex */
+		 .mi { color: #666666 } /* Literal.Number.Integer */
+		 .mo { color: #666666 } /* Literal.Number.Oct */
+		 .sb { color: #BA2121 } /* Literal.String.Backtick */
+		 .sc { color: #BA2121 } /* Literal.String.Char */
+		 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+		 .s2 { color: #BA2121 } /* Literal.String.Double */
+		 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+		 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+		 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+		 .sx { color: #008000 } /* Literal.String.Other */
+		 .sr { color: #BB6688 } /* Literal.String.Regex */
+		 .s1 { color: #BA2121 } /* Literal.String.Single */
+		 .ss { color: #19177C } /* Literal.String.Symbol */
+		 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+		 .vc { color: #19177C } /* Name.Variable.Class */
+		 .vg { color: #19177C } /* Name.Variable.Global */
+		 .vi { color: #19177C } /* Name.Variable.Instance */
+		 .il { color: #666666 } /* Literal.Number.Integer.Long */
+	</style>
+</head>
+<body>
+
+<h1>Notebook</h1>
+<h2>Table of Contents</h2>
+<ol id="toc">
+	<li>Math
+		<ol>			<li><a href="#gcd.java">Greatest Common Demonimator</a></li>
+		</ol>
+	</li>
+	<li>DP
+		<ol>			<li><a href="#Knapsack.java">Unbounded Knapsack</a></li>
+		</ol>
+	</li>
+</ol><h2>Math</h2><h3 id="gcd.java">Greatest Common Demonimator</h3>
+<p class="description">Implemented using euclids algorithm.</p><div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">gcd</span><span class="o">(</span><span class="kt">long</span> <span class="n">a</span><span class="o">,</span> <span class="kt">long</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">?</span> <span class="n">a</span> <span class="o">:</span> <span class="n">gcd</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+<h2>DP</h2><h3 id="Knapsack.java">Unbounded Knapsack</h3>
+<p class="description">Returns max value that you can fit inside of a given space.
+
+Assume not tested, from old codebook.
+
+Variables
+int N: Number of items
+int W: Max weight
+int[] v: Item values
+int[] w: Item weights</p><div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">knapsack</span><span class="o">(</span><span class="kt">int</span> <span class="n">N</span><span class="o">,</span> <span class="kt">int</span> <span class="n">W</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">v</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">w</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">W</span><span class="o">*</span><span class="n">N</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">W</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">w</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">m</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">m</span><span class="o">[</span><span class="n">j</span><span class="o">],</span> <span class="n">m</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">w</span><span class="o">[</span><span class="n">i</span><span class="o">]]</span> <span class="o">+</span> <span class="n">v</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">m</span><span class="o">[</span><span class="n">W</span> <span class="o">+</span> <span class="o">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">)];</span>
+<span class="o">}</span>
+</pre></div>
+</body>
+</html>
