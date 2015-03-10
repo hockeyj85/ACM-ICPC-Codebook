@@ -20,4 +20,15 @@ Useful code snippets and other goodies for competative programming
 
 # Notebook generation
 
-The notebook can be generated using [notebook-gen](https://github.com/BudgieInWA/notebook-gen).
+Generate a notebook by running:
+
+```sh
+./generate_notebook.sh
+```
+
+After you have run:
+```
+./setup.sh
+```
+
+The notebook is generated using [notebook-gen](https://github.com/BudgieInWA/notebook-gen).
