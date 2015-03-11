@@ -32,3 +32,13 @@ After you have run:
 ```
 
 The notebook is generated using [notebook-gen](https://github.com/BudgieInWA/notebook-gen).
+
+# Deploying to github pages.
+
+Just work on the master branch and ignore the gh-pages branch entirely, after generating a new notebook run the following command to force update the remote gh-pages branch with the local master branch.
+
+```sh
+git push -f origin master:gh-pages
+```
+
+Will be deployed at [http://hockeyj85.github.io/ACM-ICPC-Codebook](http://hockeyj85.github.io/ACM-ICPC-Codebook).
