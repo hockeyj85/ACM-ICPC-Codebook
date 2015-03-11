@@ -27,11 +27,13 @@ Generate a notebook by running:
 ```
 
 After you have run:
-```
+```sh
 ./setup.sh
 ```
 
 The notebook is generated using [notebook-gen](https://github.com/BudgieInWA/notebook-gen).
+
+The generated notebook will be at ```index.html```.
 
 # Deploying to github pages.
 
