@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Knapsack {
+class u_knapsack {
 
 
 /* START SOLUTION */

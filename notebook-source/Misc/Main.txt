@@ -1,0 +1,9 @@
+Basic structure of a solution
+
+"The only way to call a non-static method from a static method is to have 
+an instance of the class containing the non-static method." 
+- StackOverflow.com
+
+In order to use instances of our own classes this is how we must structure 
+our boilerplate code. It's only about 3 more lines of typing, but worth it 
+for the hassle it can save.

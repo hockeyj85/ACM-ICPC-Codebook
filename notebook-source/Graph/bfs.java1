@@ -1,0 +1,38 @@
+import java.util.*;
+
+/*
+Representations of Adjacency Lists:
+Unweighted: ArrayList<List<Integer>>   ArrayList<Set<Integer>> 
+Weighted:   ArrayList<List<Neighbour>> ArrayList<Map<Integer,Integer>>
+*/
+
+public class bfs {
+
+
+/* START SOLUTION */
+// Unweighted
+public static void BFS(ArrayList<List<Integer>> Graph, List<Integer> vertex) {
+	// Queue for edges
+	Queue<String> Q = new LinkedList<List<Integer>>();
+
+	
+
+}
+
+/* END SOLUTION */
+
+public static void main(String[] args) {
+
+
+	Q.add("Hello");
+	Q.add("there");
+	Q.add("mister");
+
+	String s;
+	while((s = Q.poll()) != null) {
+		System.out.print(s + " ");
+	}
+
+}
+
+}

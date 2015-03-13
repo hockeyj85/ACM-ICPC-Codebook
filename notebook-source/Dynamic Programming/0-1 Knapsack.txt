@@ -1,0 +1,7 @@
+0-1 Knapsack
+
+Only psuedocode right now :(
+
+Define m[i,w] to be the maximum value that can be attained with weight less than or equal to w using items up to i (first i items).
+
+The solution can then be found by calculating m[n,W]. To do this efficiently we can use a table to store previous computations.
