@@ -79,6 +79,10 @@
 <h1>Notebook</h1>
 <h2>Table of Contents</h2>
 <ol id="toc">
+	<li>Search
+		<ol>			<li><a href="#binary_search.java">Binary Search on equations</a></li>
+		</ol>
+	</li>
 	<li>Dynamic Programming
 		<ol>			<li><a href="#u_knapsack.java">Unbounded Knapsack</a></li>
 			<li><a href="#0-1 Knapsack.java">0-1 Knapsack</a></li>
@@ -92,7 +96,35 @@
 		<ol>			<li><a href="#gcd.java">Greatest Common Denominator</a></li>
 		</ol>
 	</li>
-</ol><h2>Dynamic Programming</h2><h3 id="u_knapsack.java">Unbounded Knapsack</h3>
+</ol><h2>Search</h2><h3 id="binary_search.java">Binary Search on equations</h3>
+<p class="description">Here's a quick example in case we need a custom binary
+search for looking at equations.</p><div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">eqn</span> <span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">// Searches between around about -10^1023 to 10^1023</span>
+<span class="c1">// Loses precision as it moves away from 0.</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="kt">double</span> <span class="n">goal</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// If we know our range within a few orders of magnitude we can knock</span>
+    <span class="c1">// it down from about 1000 loops to 50.</span>
+    <span class="kt">double</span> <span class="n">front</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">back</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">eps</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="o">-</span><span class="mi">6</span><span class="o">);</span>
+
+    <span class="c1">// Todo: work out optimum way to scale eps with mid for best precision.</span>
+    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">eqn</span><span class="o">(</span><span class="n">mid</span><span class="o">)</span> <span class="o">-</span> <span class="n">goal</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="o">)</span>   <span class="k">return</span> <span class="n">mid</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">goal</span> <span class="o">&lt;</span> <span class="n">eqn</span><span class="o">(</span><span class="n">mid</span><span class="o">))</span>                   <span class="n">back</span> <span class="o">=</span> <span class="n">mid</span><span class="o">;</span>
+        <span class="k">else</span>                                   <span class="n">front</span> <span class="o">=</span> <span class="n">mid</span><span class="o">;</span>
+        
+        <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">front</span> <span class="o">+</span> <span class="n">back</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<h2>Dynamic Programming</h2><h3 id="u_knapsack.java">Unbounded Knapsack</h3>
 <p class="description">Returns max value that you can fit inside of a given space.
 
 Assume not tested, from old codebook.

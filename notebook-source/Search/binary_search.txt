@@ -1,0 +1,4 @@
+Binary Search on equations
+
+Here's a quick example in case we need a custom binary
+search for looking at equations.
