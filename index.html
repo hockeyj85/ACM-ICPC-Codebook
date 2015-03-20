@@ -79,6 +79,11 @@
 <h1>Notebook</h1>
 <h2>Table of Contents</h2>
 <ol id="toc">
+	<li>Graph
+		<ol>			<li><a href="#dijkstras.java">Dijkstras SSSP</a></li>
+			<li><a href="#floyd-warshall.java">Floyd-Warshall</a></li>
+		</ol>
+	</li>
 	<li>Search
 		<ol>			<li><a href="#binary_search.java">Binary Search on equations</a></li>
 		</ol>
@@ -96,13 +101,105 @@
 		<ol>			<li><a href="#gcd.java">Greatest Common Denominator</a></li>
 		</ol>
 	</li>
-</ol><h2>Search</h2><h3 id="binary_search.java">Binary Search on equations</h3>
+</ol><h2>Graph</h2><h3 id="dijkstras.java">Dijkstras SSSP</h3>
+<p class="description">An implementation using adjacentcy lists.</p><div class="highlight"><pre><span class="kd">class</span> <span class="nc">Vertex</span> <span class="kd">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="n">Vertex</span><span class="o">()</span> <span class="o">{}</span>
+    <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">floor</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">prev</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">dist</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">visited</span><span class="o">;</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;</span> <span class="n">edges</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span> <span class="o">(</span><span class="n">Vertex</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="k">return</span> <span class="n">Double</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">dist</span><span class="o">,</span> <span class="n">o</span><span class="o">.</span><span class="na">dist</span><span class="o">);</span> 
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Edge</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="n">cost</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">dest</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kt">void</span> <span class="nf">resetGraph</span><span class="o">(</span><span class="n">Vertex</span><span class="o">[]</span> <span class="n">graph</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Vertex</span> <span class="nl">v:</span> <span class="n">graph</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">continue</span><span class="o">;</span>
+        <span class="n">v</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="n">v</span><span class="o">.</span><span class="na">dist</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+        <span class="n">v</span><span class="o">.</span><span class="na">visited</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kt">double</span> <span class="nf">dijkstras</span><span class="o">(</span><span class="n">Vertex</span><span class="o">[]</span> <span class="n">graph</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">finish</span><span class="o">)</span> <span class="o">{</span>
+    
+    <span class="n">graph</span><span class="o">[</span><span class="n">start</span><span class="o">].</span><span class="na">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">graph</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+
+    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;();</span>
+    <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">graph</span><span class="o">[</span><span class="n">start</span><span class="o">]);</span>
+    
+    <span class="k">while</span> <span class="o">(!</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">Vertex</span> <span class="n">u</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">visited</span><span class="o">[</span><span class="n">u</span><span class="o">.</span><span class="na">id</span><span class="o">])</span> <span class="k">continue</span><span class="o">;</span>
+        <span class="n">visited</span><span class="o">[</span><span class="n">u</span><span class="o">.</span><span class="na">id</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="n">Edge</span> <span class="nl">e:</span> <span class="n">u</span><span class="o">.</span><span class="na">edges</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">q</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
+            <span class="kt">double</span> <span class="n">alt</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="na">dist</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">cost</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">alt</span> <span class="o">&lt;</span> <span class="n">graph</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">dest</span><span class="o">].</span><span class="na">dist</span><span class="o">)</span> <span class="o">{</span> 
+                <span class="n">graph</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">dest</span><span class="o">].</span><span class="na">dist</span> <span class="o">=</span> <span class="n">alt</span><span class="o">;</span> 
+                <span class="n">graph</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">dest</span><span class="o">].</span><span class="na">prev</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="na">id</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">graph</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">dest</span><span class="o">]);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">graph</span><span class="o">[</span><span class="n">finish</span><span class="o">].</span><span class="na">dist</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="n">String</span> <span class="nf">path</span> <span class="o">(</span><span class="n">Vertex</span><span class="o">[]</span> <span class="n">graph</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">finish</span><span class="o">)</span> <span class="o">{</span>
+    
+    <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">finish</span><span class="o">;</span>
+
+    <span class="n">String</span> <span class="n">path</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">p</span><span class="o">));</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">graph</span><span class="o">[</span><span class="n">p</span><span class="o">].</span><span class="na">prev</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">graph</span><span class="o">[</span><span class="n">p</span><span class="o">].</span><span class="na">prev</span><span class="o">;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">p</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="o">;</span> 
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">path</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<h3 id="floyd-warshall.java">Floyd-Warshall</h3>
+<p class="description">All pairs shortest path.
+Runs in n^3, takes n^3 space.
+
+k=0 is our base case - dist(0,i,j) is the length of the edge from 
+vertex i to vertex j if it exists, and \infty otherwise.
+
+
+After N iterations, there is no need anymore to go through any more 
+intermediate vertices, so the distance dist(N,i,j) represents the 
+shortest distance between i and j.</p><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">N</span>
+   <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">N</span>
+      <span class="k">if</span> <span class="n">there</span> <span class="n">is</span> <span class="n">an</span> <span class="n">edge</span> <span class="n">from</span> <span class="n">i</span> <span class="n">to</span> <span class="n">j</span>
+         <span class="n">dist</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">the</span> <span class="n">length</span> <span class="n">of</span> <span class="n">the</span> <span class="n">edge</span> <span class="n">from</span> <span class="n">i</span> <span class="n">to</span> <span class="n">j</span>
+      <span class="k">else</span>
+         <span class="n">dist</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">INFINITY</span>
+  
+<span class="k">for</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">N</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">N</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">N</span>
+         <span class="n">dist</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">min</span><span class="o">(</span><span class="n">dist</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">],</span> <span class="n">dist</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">k</span><span class="o">]</span> <span class="o">+</span> <span class="n">dist</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">k</span><span class="o">][</span><span class="n">j</span><span class="o">])</span>
+</pre></div>
+<h2>Search</h2><h3 id="binary_search.java">Binary Search on equations</h3>
 <p class="description">Here's a quick example in case we need a custom binary
 search for looking at equations.</p><div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">eqn</span> <span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="c1">// Searches between around about -10^1023 to 10^1023</span>
+<span class="c1">// Searches between around about -10^340 to 10^340</span>
 <span class="c1">// Loses precision as it moves away from 0.</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="kt">double</span> <span class="n">goal</span><span class="o">)</span> <span class="o">{</span>
 
@@ -150,9 +247,11 @@ int[] w: Item weights</p><div class="highlight"><pre><span class="kd">public</sp
 <h3 id="0-1 Knapsack.java">0-1 Knapsack</h3>
 <p class="description">Only psuedocode right now :(
 
-Define m[i,w] to be the maximum value that can be attained with weight less than or equal to w using items up to i (first i items).
+Define m[i,w] to be the maximum value that can be attained with 
+weight less than or equal to w using items up to i (first i items).
 
-The solution can then be found by calculating m[n,W]. To do this efficiently we can use a table to store previous computations.</p><div class="highlight"><pre><span class="c1">// Input:</span>
+The solution can then be found by calculating m[n,W]. To do this 
+efficiently we can use a table to store previous computations.</p><div class="highlight"><pre><span class="c1">// Input:</span>
 <span class="c1">// Values (stored in array v)</span>
 <span class="c1">// Weights (stored in array w)</span>
 <span class="c1">// Number of distinct items (n)</span>
