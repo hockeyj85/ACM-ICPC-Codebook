@@ -8,7 +8,7 @@ public static double eqn (double x) {
 	return Math.pow(x, 2);
 }
 
-// Searches between around about -10^1023 to 10^1023
+// Searches between around about -10^340 to 10^340
 // Loses precision as it moves away from 0.
 public static double binarySearch(double goal) {
 
