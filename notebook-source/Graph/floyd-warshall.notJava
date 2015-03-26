@@ -1,0 +1,41 @@
+/*
+// Algorithmist psuedo
+
+for i = 1 to N
+   for j = 1 to N
+      if there is an edge from i to j
+         dist[0][i][j] = the length of the edge from i to j
+      else
+         dist[0][i][j] = INFINITY
+  
+for k = 1 to N
+   for i = 1 to N
+      for j = 1 to N
+         dist[k][i][j] = min(dist[k-1][i][j], dist[k-1][i][k] + dist[k-1][k][j])
+
+
+// Wiki psuedo with path reconstruction
+
+// let dist be a |V| × |V| array of minimum distances initialized to ∞ (infinity)
+// let next be a |V| × |V| array of vertex indices initialized to null
+
+procedure FloydWarshallWithPathReconstruction ()
+   for each edge (u,v)
+      dist[u][v] ← w(u,v)  // the weight of the edge (u,v)
+      next[u][v] ← v
+   for k from 1 to |V| // standard Floyd-Warshall implementation
+      for i from 1 to |V|
+         for j from 1 to |V|
+            if dist[i][k] + dist[k][j] < dist[i][j] then
+               dist[i][j] ← dist[i][k] + dist[k][j]
+               next[i][j] ← next[i][k]
+
+procedure Path(u, v)
+   if next[u][v] = null then
+       return []
+   path = [u]
+   while u ≠ v
+       u ← next[u][v]
+       path.append(u)
+   return path
+*/

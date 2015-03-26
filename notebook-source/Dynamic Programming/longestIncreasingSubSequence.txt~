@@ -1,0 +1,5 @@
+Longest increasing/deacreasing subsequence
+
+This implementation is a bit more complex than usual because it
+checks that 2 different values on an object are strictly increasing
+and decreasing respectively.

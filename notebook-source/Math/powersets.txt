@@ -1,0 +1,4 @@
+Powersets
+
+Implemented using a bitset.
+This is also a great start for a brute force function.

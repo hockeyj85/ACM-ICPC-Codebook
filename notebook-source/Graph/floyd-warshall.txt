@@ -1,11 +1,12 @@
 Floyd-Warshall
 
+Assumes no negatice cycles.
+
 All pairs shortest path.
 Runs in n^3, takes n^3 space.
 
 k=0 is our base case - dist(0,i,j) is the length of the edge from 
 vertex i to vertex j if it exists, and \infty otherwise.
-
 
 After N iterations, there is no need anymore to go through any more 
 intermediate vertices, so the distance dist(N,i,j) represents the 
