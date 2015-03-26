@@ -1,3 +1,4 @@
-Greatest Common Denominator
+GCD and LCM
 
-Implemented using Euclids algorithm.
+Greatest common demoninator implemented using Euclids algorithm.
+Lowest common multiple implemented using the definition.
