@@ -1,0 +1,5 @@
+Endian Swap
+
+This function works on an int, if this needs to be re-coded
+for a different data type just remember that endianess
+cares about BYTES and not BITS.
